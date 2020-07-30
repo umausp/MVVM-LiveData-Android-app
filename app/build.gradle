@@ -50,7 +50,7 @@ android {
                 java.srcDir sharedTestDir
             }
         }
-
+        buildConfigField "String", "BASE_URI", '"https://ghapi.huchen.dev/"'
     }
 
     buildTypes {
@@ -107,8 +107,14 @@ dependencies {
 
     // Network
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+
+    //OkHttp
+    implementation ("com.squareup.okhttp3:okhttp:$okhttp3_version"){
+        force = true //API 19 support
+    }
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
     implementation 'com.android.support:multidex:1.0.3'
-
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
