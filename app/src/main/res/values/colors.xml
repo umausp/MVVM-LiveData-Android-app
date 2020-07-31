@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="color_25282B">#25282b</color>
+
+    <dimen name="sp_21">21sp</dimen>
+    <dimen name="dp_21">21dp</dimen>
+    <dimen name="dp_260">260dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
+    <dimen name="dp_32">32dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
 </resources>

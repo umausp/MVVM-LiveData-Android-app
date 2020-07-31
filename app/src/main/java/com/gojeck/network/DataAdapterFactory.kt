@@ -34,43 +34,43 @@ class DataAdapterFactory : CallAdapter.Factory() {
                         return arrayOf(callType)
                     }
                 }
-                ResourceAdapter<TrendingRepositoriesModel>(trendingRepositoriesModel)
+                ResourceAdapter(trendingRepositoriesModel)
             } else null
         }
         else -> null
     }
 
-    class ResourceAdapter<U : TrendingRepositoriesModel>(
+    class ResourceAdapter(
         private val type: Type
-    ) : CallAdapter<U, Call<U>> {
+    ) : CallAdapter<TrendingRepositoriesModel, Call<TrendingRepositoriesModel>> {
 
         override fun responseType() = type
-        override fun adapt(call: Call<U>): Call<U> = ResourceCall(call)
+        override fun adapt(call: Call<TrendingRepositoriesModel>): Call<TrendingRepositoriesModel> = ResourceCall(call)
 
-        class ResourceCall<U : TrendingRepositoriesModel>(proxy: Call<U>) :
-            CallDelegate<U, U>(proxy) {
-            override fun enqueueImpl(callback: Callback<U>) {
+        class ResourceCall(proxy: Call<TrendingRepositoriesModel>) :
+            CallDelegate<TrendingRepositoriesModel, TrendingRepositoriesModel>(proxy) {
+            override fun enqueueImpl(callback: Callback<TrendingRepositoriesModel>) {
 
-                proxy.enqueue(object : Callback<U> {
-                    override fun onResponse(call: Call<U>, response: Response<U>) {
+                proxy.enqueue(object : Callback<TrendingRepositoriesModel> {
+                    override fun onResponse(call: Call<TrendingRepositoriesModel>, response: Response<TrendingRepositoriesModel>) {
                         if (response.body() == null) {
-                            onFail(null, callback)
+                            onFail(callback)
                             return
                         }
 
                         if (!response.isSuccessful) {
-                            onFail(null, callback)
+                            onFail(callback)
                             return
                         }
 
-                        val body: U? = response.body()
+                        val body: TrendingRepositoriesModel? = response.body()
                         if (body == null) {
-                            onFail(null, callback)
+                            onFail(callback)
                             return
                         }
 
                         if (body.isEmpty()) {
-                            onFail(body, callback)
+                            onFail(callback)
                             return
                         }
 
@@ -81,16 +81,16 @@ class DataAdapterFactory : CallAdapter.Factory() {
                             }
                         }
 
-                        onFail(body, callback)
+                        onFail(callback)
                     }
 
-                    override fun onFailure(call: Call<U>, t: Throwable) {
-                        onError(t, callback)
+                    override fun onFailure(call: Call<TrendingRepositoriesModel>, t: Throwable) {
+                        onFail(callback)
                     }
                 })
             }
 
-            override fun cloneImpl(): Call<U> {
+            override fun cloneImpl(): Call<TrendingRepositoriesModel> {
                 return ResourceCall(proxy.clone())
             }
 
@@ -99,34 +99,24 @@ class DataAdapterFactory : CallAdapter.Factory() {
                     log(this)
                     Resource.NetworkError()
                 }
-                else -> Resource.Error(this ?: RuntimeException("unknown throwable"))
+                else -> Resource.NetworkError()
             }
 
 
-            fun onSuccess(response: U, callback: Callback<U>) {
+            fun onSuccess(response: TrendingRepositoriesModel, callback: Callback<TrendingRepositoriesModel>) {
                 callback.onResponse(
                     this@ResourceCall,
                     Response.success(response)
                 )
             }
 
-            fun onFail(response: U?, callback: Callback<U>) {
+            fun onFail(callback: Callback<TrendingRepositoriesModel>) {
                 callback.onFailure(
                     this@ResourceCall,
                     ResourceException(
-                        Resource.Failure(
-                            "Please try again."
-                        )
+                        Resource.NetworkError()
                     )
                 )
-            }
-
-            fun onError(throwable: Throwable?, callback: Callback<U>) {
-                if (throwable is ResourceException) {
-                    callback.onFailure(this@ResourceCall, throwable)
-                } else {
-                    callback.onFailure(this@ResourceCall, ResourceException(throwable.toResult()))
-                }
             }
 
             override fun timeout(): Timeout {

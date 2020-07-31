@@ -1,20 +1,21 @@
 package com.gojeck
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.gojeck.base.BaseActivity
 import com.gojeck.feature.viewModel.RepositoryViewModel
 import com.gojeck.utils.LogcatLogger
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     val repoViewModel: RepositoryViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        repoViewModel.repositoryLiveData.observe(this, Observer {
+    override val layoutId: Int = R.layout.activity_main
+    override val classPackageName: String = BuildConfig.APPLICATION_ID
+
+    override fun onViewModelSetup() {
+        repoViewModel.initState.observe(initStateObserver)
+        repoViewModel.repositoryLiveData.observe(Observer {
             LogcatLogger.d("test", it.toString())
         })
     }
