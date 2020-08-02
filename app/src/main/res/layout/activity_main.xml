@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.gojeck.feature.viewModel.RepositoryViewModel" />
+    </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,8 +28,19 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" >
-            <include layout="@layout/trending_loading_layout"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_activity_main_trending_repository"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{model.shimmerLoading ? View.GONE : View.VISIBLE}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/trending_repositories_layout" />
+
+            <include layout="@layout/shimmering_loading_layout"
+                android:id="@+id/shimmer_layout"/>
+
         </FrameLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

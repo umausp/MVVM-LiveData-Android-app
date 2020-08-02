@@ -26,6 +26,11 @@ class NetworkErrorFragment : DialogFragment() {
         return inflater.inflate(R.layout.layout_network_error, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NO_FRAME, theme)
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return object : Dialog(requireContext(), theme) {
             override fun onBackPressed() {

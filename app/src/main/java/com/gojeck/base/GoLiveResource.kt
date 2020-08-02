@@ -54,5 +54,10 @@ private suspend fun <T> CoroutineScope.getResource(
     }
 }
 
-
+@MainThread
+inline fun <X, Y> MediatorLiveData<X>.map(crossinline transform: (X) -> Y): MediatorLiveData<Y> {
+    val result = MediatorLiveData<Y>()
+    result.addSource(this) { x -> result.value = transform(x) }
+    return result
+}
 

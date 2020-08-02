@@ -1,8 +1,8 @@
 package com.gojeck.base
 
-import android.view.View
 import androidx.lifecycle.Observer
 import com.gojeck.R
+
 
 /**
  * hide layout on loading.
@@ -20,13 +20,8 @@ fun IBaseUi.stateObserverFullPage(
         }
 
         if (showProgressBar) {
-            if (it.isLoading()) {
-                binding.root.visibility = View.GONE
-                shimmeringLayout.value = true
-            } else {
-                binding.root.visibility = View.VISIBLE
-                shimmeringLayout.value = false
-            }
+            shimmeringLayout.value = it.isLoading()
+//            showLoadingFullPage(it.isLoading())
         }
 
         if (showFullPageError) {
@@ -47,3 +42,19 @@ private fun IBaseUi.showNetworkErrorFullPage(retry: () -> Unit) {
     fragment.retryListener = retry
     fragment.showIfNotShowing(findFragmentManager(), classPackageName)
 }
+
+private fun IBaseUi.showLoadingFullPage(showLoading: Boolean) {
+    var fragment =
+        binding.root.getTag(R.id.view_tag_shimmer_loading) as? ShimmerLoadingDialogFragment?
+    if (fragment == null) {
+        fragment = ShimmerLoadingDialogFragment()
+        binding.root.setTag(R.id.view_tag_shimmer_loading, fragment)
+    }
+
+    if (showLoading) {
+        fragment.showIfNotShowing(findFragmentManager(), classPackageName)
+    } else {
+//        fragment.dismissAllowingStateLoss()
+    }
+}
+

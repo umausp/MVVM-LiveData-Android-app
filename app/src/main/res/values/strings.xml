@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">GoJeck Project</string>
     <string name="trending_string">Trending</string>
+    <string name="sample_subtitle">Python Data Scince Handbook</string>
+    <string name="sample_title">jakevdp</string>
+    <string name="sample_language">C++</string>
+    <string name="no_language">No Language</string>
 </resources>

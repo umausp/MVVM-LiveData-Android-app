@@ -16,10 +16,22 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
-    <style name="Toolbar" parent="Widget.AppCompat.Toolbar">
-        <item name="titleMargin">50dp</item>
-        <!--  <item name="contentInsetStart">0dp</item>
-          <item name="contentInsetStartWithNavigation">5.6dp</item>-->
+    <style name="TextTitle">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/dp_12</item>
+        <item name="android:textColor">@color/color_52575c</item>
+    </style>
+
+    <style name="TextSubTitle">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/dp_15</item>
+        <item name="android:textColor">@color/color_52575c</item>
+    </style>
+
+    <style name="TextDescription">
+        <item name="android:fontFamily">@font/pingfangsc_regular</item>
+        <item name="android:textSize">@dimen/dp_12</item>
+        <item name="android:textColor">@color/color_52575c</item>
     </style>
 
 

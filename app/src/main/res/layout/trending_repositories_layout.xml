@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.gojeck.feature.model.TrendingRepositoryMainViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> model.itemOnClick()}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_16">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_trending_repository_image"
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                app:imgUrl="@{model.avatar}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/circle_drawable" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_trending_repository_title"
+                style="@style/TextTitle"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="@{model.author}"
+                app:layout_constraintStart_toEndOf="@id/img_trending_repository_image"
+                app:layout_constraintTop_toTopOf="@id/img_trending_repository_image"
+                tools:text="@string/sample_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_trending_repository_sub_title"
+                style="@style/TextSubTitle"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_6"
+                android:text="@{model.name}"
+                app:layout_constraintStart_toEndOf="@id/img_trending_repository_image"
+                app:layout_constraintTop_toBottomOf="@id/txt_trending_repository_title"
+                tools:text="@string/sample_subtitle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_trending_repository_description"
+                style="@style/TextDescription"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_6"
+                android:text="@{model.description}"
+                android:visibility="@{model.itemClickedLiveData ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_trending_repository_image"
+                app:layout_constraintTop_toBottomOf="@id/txt_trending_repository_sub_title"
+                tools:text="@string/sample_subtitle" />
+
+            <ImageView
+                android:id="@+id/img_trending_repository_language_red_dot"
+                android:layout_width="@dimen/dp_12"
+                android:layout_height="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_8"
+                android:src="@drawable/drawable_red_dot"
+                app:imgTint="@{model.languageColor}"
+                android:visibility="@{model.itemClickedLiveData ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toStartOf="@id/txt_trending_repository_title"
+                app:layout_constraintTop_toBottomOf="@id/txt_trending_repository_description" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_trending_repository_language"
+                style="@style/TextTitle"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:text="@{!TextUtils.isEmpty(model.language) ? model.language : @string/no_language}"
+                android:visibility="@{model.itemClickedLiveData ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/img_trending_repository_language_red_dot"
+                app:layout_constraintStart_toEndOf="@id/img_trending_repository_language_red_dot"
+                app:layout_constraintTop_toTopOf="@id/img_trending_repository_language_red_dot"
+                tools:text="@string/sample_language" />
+
+            <ImageView
+                android:id="@+id/img_trending_repository_starts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:src="@drawable/ic_repository_start"
+                android:visibility="@{model.itemClickedLiveData ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/img_trending_repository_language_red_dot"
+                app:layout_constraintStart_toEndOf="@id/txt_trending_repository_language"
+                app:layout_constraintTop_toTopOf="@id/img_trending_repository_language_red_dot" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_trending_repository_stars"
+                style="@style/TextTitle"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:text="@{`` + model.stars}"
+                android:visibility="@{model.itemClickedLiveData ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/img_trending_repository_language_red_dot"
+                app:layout_constraintStart_toEndOf="@id/img_trending_repository_starts"
+                app:layout_constraintTop_toTopOf="@id/img_trending_repository_language_red_dot"
+                tools:text="233" />
+
+            <ImageView
+                android:id="@+id/img_trending_repository_fork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:src="@drawable/ic_repository_fork"
+                android:visibility="@{model.itemClickedLiveData ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/img_trending_repository_language_red_dot"
+                app:layout_constraintStart_toEndOf="@id/txt_trending_repository_stars"
+                app:layout_constraintTop_toTopOf="@id/img_trending_repository_language_red_dot" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_trending_repository_fork"
+                style="@style/TextTitle"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:text="@{`` + model.forks}"
+                android:visibility="@{model.itemClickedLiveData ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/img_trending_repository_language_red_dot"
+                app:layout_constraintStart_toEndOf="@id/img_trending_repository_fork"
+                app:layout_constraintTop_toTopOf="@id/img_trending_repository_language_red_dot"
+                tools:text="233" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@{model.itemClickedLiveData ? @drawable/bottom_shadow : @drawable/drawable_bottom_line}" />
+    </FrameLayout>
+</layout>
