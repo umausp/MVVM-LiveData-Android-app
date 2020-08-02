@@ -9,9 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.facebook.shimmer.ShimmerFrameLayout
 import com.gojeck.R
-import java.lang.IllegalStateException
 
 
 /**
@@ -28,7 +26,7 @@ import java.lang.IllegalStateException
  * */
 @BindingAdapter("itemList", "itemLayoutId")
 fun <VM : Any> RecyclerView.bindData(
-    itemList: List<VM>?,
+    itemList: List<VM>,
     layoutId: Int
 ) {
     bindData(itemList, layoutId, null)

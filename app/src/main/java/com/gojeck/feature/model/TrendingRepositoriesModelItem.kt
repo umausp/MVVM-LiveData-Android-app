@@ -1,31 +1,58 @@
 package com.gojeck.feature.model
 
 
-import androidx.annotation.Keep
+import androidx.annotation.Nullable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Keep
+@Entity(tableName = "trendingRepositoriesEntity")
 data class TrendingRepositoriesModelItem(
+
+    @PrimaryKey(autoGenerate = true) val uid: Int,
+
+    @ColumnInfo(name = "author")
     @SerializedName("author")
-    val author: String?,
+    var author: String = "",
+
+    @ColumnInfo(name = "avatar")
     @SerializedName("avatar")
-    val avatar: String?,
-    @SerializedName("builtBy")
-    val builtBy: List<BuiltBy>?,
+    var avatar: String = "",
+
+    @ColumnInfo(name = "currentPeriodStars")
     @SerializedName("currentPeriodStars")
-    val currentPeriodStars: Int?,
+    var currentPeriodStars: Int = 0,
+
+    @ColumnInfo(name = "description")
     @SerializedName("description")
-    val description: String?,
+    var description: String = "",
+
+    @ColumnInfo(name = "forks")
     @SerializedName("forks")
-    val forks: Int?,
+    var forks: Int = 0,
+
+    @ColumnInfo(name = "language")
     @SerializedName("language")
     val language: String?,
+
+    @ColumnInfo(name = "languageColor")
     @SerializedName("languageColor")
     val languageColor: String?,
+
+    @ColumnInfo(name = "name")
     @SerializedName("name")
-    val name: String?,
+    var name: String = "",
+
+    @ColumnInfo(name = "stars")
     @SerializedName("stars")
-    val stars: Int?,
+    var stars: Int = 0,
+
+    @ColumnInfo(name = "url")
     @SerializedName("url")
-    val url: String?
-)
+    var url: String = ""
+){
+//    fun getLanguageColor() : String{
+//        return languageColor ?: "#ffcc0000"
+//    }
+}

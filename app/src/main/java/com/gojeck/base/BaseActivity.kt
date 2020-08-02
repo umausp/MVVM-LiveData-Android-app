@@ -7,7 +7,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.gojeck.R
@@ -25,6 +24,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseUi {
 
     override val shimmeringLayout: MutableLiveData<Boolean> = MutableLiveData(false)
 
+    override val networkErrorLayoutLiveData: MutableLiveData<Boolean> = MutableLiveData(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +64,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseUi {
 
     override fun onViewModelSetup() {}
 
-    override fun <T> MediatorLiveData<T>.observe(observer: Observer<in T>) {
+    override fun <T> GoLiveData<T>.observe(observer: Observer<in T>) {
         observe(this@BaseActivity, observer)
     }
 

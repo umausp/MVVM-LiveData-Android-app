@@ -15,8 +15,14 @@ interface IBaseViewModel {
     val initState: GoLiveState
 
     @MainThread
-    fun <T> MediatorLiveData<T>.loadDataAndState(
+    fun <T> GoLiveData<T>.loadDataAndState(
         state2: GoLiveState?,
         work: suspend CoroutineScope.() -> T
     ): Job
+
+    @MainThread
+    fun <T> GoLiveResource<T>.load(state: GoLiveState, work: suspend CoroutineScope.() -> T): Job
+
+    @MainThread
+    fun <T> GoLiveResource<T>.load(work: suspend CoroutineScope.() -> T): Job
 }

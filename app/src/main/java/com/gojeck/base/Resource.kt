@@ -5,6 +5,7 @@ import java.io.IOException
 
 sealed class Resource<out T> {
     data class Loading(val job: Job? = null) : Resource<Nothing>()
+
     data class Success<T>(val data: T) : Resource<T>()
     data class NetworkError(val retry: () -> Unit = {}) : Resource<Nothing>()
 

@@ -1,30 +1,53 @@
 package com.gojeck.feature.viewModel
 
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import com.gojeck.base.BaseViewModel
-import com.gojeck.base.map
-import com.gojeck.feature.model.TrendingRepositoriesModel
+import com.gojeck.base.GoLiveData
+import com.gojeck.base.GoLiveResource
+import com.gojeck.base.successDataMap
+import com.gojeck.feature.model.TrendingRepositoriesModelItem
 import com.gojeck.feature.model.TrendingRepositoryMainViewModel
-import com.gojeck.network.api.RepositoryApiService
+import com.gojeck.network.api.TrendingRepoRepositoryImpl
+import com.gojeck.utils.NetworkUtils
+import com.gojeck.utils.ctx
 
-class RepositoryViewModel(api: RepositoryApiService) : BaseViewModel() {
-    private val repositoryLiveData = MediatorLiveData<TrendingRepositoriesModel>()
-    val shimmerLoading = MutableLiveData(false)
+class RepositoryViewModel(private val trendingRepoRepositoryImpl: TrendingRepoRepositoryImpl) :
+    BaseViewModel() {
 
-    val trendingRepositoryLiveData = repositoryLiveData.map {
-        convertToTrendingRepositoryMainViewModel(it)
-    }
+    val shimmerLoadingLiveData = GoLiveData(false)
+    val networkErrorLiveData = GoLiveData(false)
+    val trendingRepositoryLiveData = GoLiveResource<List<TrendingRepositoryMainViewModel>?>()
 
     init {
-        repositoryLiveData.loadDataAndState(initState) {
-            api.getTrendingRepositories()
+        getTrendingRepositories(false)
+    }
+
+    fun getTrendingRepositories(forRefresh : Boolean) {
+        if (NetworkUtils.isNetworkAvailable(ctx)) {
+            showNetworkErrorView(false)
+
+            showLoading(true)
+
+            trendingRepositoryLiveData.replaceSource(
+                trendingRepoRepositoryImpl.getTrendingLiveData(forRefresh).successDataMap {
+                    showLoading(false)
+                    convertToTrendingRepositoryMainViewModel(it)
+                })
+        } else {
+            showNetworkErrorView(true)
         }
     }
 
-    private fun convertToTrendingRepositoryMainViewModel(trendingRepositoriesModel: TrendingRepositoriesModel): List<TrendingRepositoryMainViewModel> {
+    private fun convertToTrendingRepositoryMainViewModel(trendingRepositoriesModel: List<TrendingRepositoriesModelItem>): List<TrendingRepositoryMainViewModel> {
         return trendingRepositoriesModel.map {
             TrendingRepositoryMainViewModel(it)
         }
+    }
+
+    private fun showLoading(showLoading: Boolean) {
+        shimmerLoadingLiveData.value = showLoading
+    }
+
+    private fun showNetworkErrorView(showNetworkError: Boolean) {
+        networkErrorLiveData.value = showNetworkError
     }
 }

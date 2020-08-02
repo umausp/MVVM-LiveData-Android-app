@@ -11,8 +11,15 @@ import org.koin.core.logger.EmptyLogger
 
 class MyApplication : MultiDexApplication() {
 
+    companion object {
+        @JvmStatic
+        lateinit var application: MyApplication
+            private set
+    }
+
     override fun onCreate() {
         super.onCreate()
+        application = this
         initKoin()
     }
 

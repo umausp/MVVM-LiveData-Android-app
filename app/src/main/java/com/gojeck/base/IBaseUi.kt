@@ -31,7 +31,9 @@ interface IBaseUi : SavedStateRegistryOwner {
 
     val shimmeringLayout: MutableLiveData<Boolean>
 
-    fun <T> MediatorLiveData<T>.observe(observer: Observer<in T>)
+    val networkErrorLayoutLiveData: MutableLiveData<Boolean>
+
+    fun <T> GoLiveData<T>.observe(observer: Observer<in T>)
 
     fun findFragmentManager(): FragmentManager
 

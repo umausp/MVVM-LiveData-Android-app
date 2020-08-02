@@ -30,16 +30,26 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_activity_main_trending_repository"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="@{model.shimmerLoading ? View.GONE : View.VISIBLE}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/trending_repositories_layout" />
+                android:layout_height="match_parent">
 
-            <include layout="@layout/shimmering_loading_layout"
-                android:id="@+id/shimmer_layout"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_activity_main_trending_repository"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/trending_repositories_layout" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <include
+                android:id="@+id/network_error_layout"
+                layout="@layout/netowrk_error_layout" />
+
+            <include
+                android:id="@+id/shimmer_layout"
+                layout="@layout/shimmering_loading_layout" />
 
         </FrameLayout>
 

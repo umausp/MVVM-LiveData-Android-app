@@ -1,10 +1,12 @@
 package com.gojeck.feature.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import kotlinx.android.parcel.Parcelize
 
-@Keep
+@Parcelize
 data class BuiltBy(
     @SerializedName("avatar")
     val avatar: String?,
@@ -12,4 +14,4 @@ data class BuiltBy(
     val href: String?,
     @SerializedName("username")
     val username: String?
-)
+) : Parcelable

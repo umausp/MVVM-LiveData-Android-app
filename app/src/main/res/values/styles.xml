@@ -34,5 +34,16 @@
         <item name="android:textColor">@color/color_52575c</item>
     </style>
 
+    <style name="TextViewRobotoBold">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/dp_18</item>
+        <item name="android:textColor">@color/color_4a4a4a</item>
+    </style>
+
+    <style name="TextViewErrorSubText">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/dp_15</item>
+        <item name="android:textColor">@color/color_929292</item>
+    </style>
 
 </resources>

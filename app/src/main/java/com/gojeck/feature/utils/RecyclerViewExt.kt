@@ -1,13 +1,13 @@
 package com.gojeck.feature.utils
 
 import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gojeck.base.BaseRecyclerViewAdapter
+import com.gojeck.feature.model.TrendingRepositoryMainViewModel
 
 fun <VM : Any> RecyclerView.bindData(
-    itemList: List<VM>?,
+    itemList: List<VM>,
     layoutId: Int,
     lifecycleOwner: LifecycleOwner?
 ) {

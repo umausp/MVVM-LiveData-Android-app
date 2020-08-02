@@ -113,9 +113,7 @@ class DataAdapterFactory : CallAdapter.Factory() {
             fun onFail(callback: Callback<TrendingRepositoriesModel>) {
                 callback.onFailure(
                     this@ResourceCall,
-                    ResourceException(
-                        Resource.NetworkError()
-                    )
+                    IOException()
                 )
             }
 

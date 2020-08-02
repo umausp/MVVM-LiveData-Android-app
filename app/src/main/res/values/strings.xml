@@ -5,4 +5,7 @@
     <string name="sample_title">jakevdp</string>
     <string name="sample_language">C++</string>
     <string name="no_language">No Language</string>
+    <string name="something_went_wrong">Something went wrong&#8230;</string>
+    <string name="error_sub_text">An alien is probably blocking your signal</string>
+    <string name="retry">RETRY</string>
 </resources>

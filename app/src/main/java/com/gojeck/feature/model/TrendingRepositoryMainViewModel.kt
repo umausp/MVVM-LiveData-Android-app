@@ -6,7 +6,6 @@ class TrendingRepositoryMainViewModel(trendingRepositoriesModelItem: TrendingRep
 
     val author = trendingRepositoriesModelItem.author
     val avatar = trendingRepositoriesModelItem.avatar
-    val builtBy = trendingRepositoriesModelItem.builtBy
     val currentPeriodStars = trendingRepositoriesModelItem.currentPeriodStars
     val description = trendingRepositoriesModelItem.description
     val forks = trendingRepositoriesModelItem.forks
