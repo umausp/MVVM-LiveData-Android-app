@@ -1,23 +1,26 @@
 package com.gojeck.feature.model
 
-import androidx.lifecycle.MutableLiveData
+import androidx.databinding.ObservableBoolean
+import com.gojeck.base.GoLiveData
+import com.gojeck.base.call
 
-class TrendingRepositoryMainViewModel(trendingRepositoriesModelItem: TrendingRepositoriesModelItem) {
+class TrendingRepositoryMainViewModel(
+    trendingRepositoriesModelItem: TrendingRepositoriesModelItem,
+    private val repositoryItemClickLiveData: GoLiveData<TrendingRepositoryMainViewModel>
+) {
 
     val author = trendingRepositoriesModelItem.author
     val avatar = trendingRepositoriesModelItem.avatar
-    val currentPeriodStars = trendingRepositoriesModelItem.currentPeriodStars
     val description = trendingRepositoriesModelItem.description
     val forks = trendingRepositoriesModelItem.forks
     val language = trendingRepositoriesModelItem.language
     val languageColor = trendingRepositoriesModelItem.languageColor
     val name = trendingRepositoriesModelItem.name
     val stars = trendingRepositoriesModelItem.stars
-    val url = trendingRepositoriesModelItem.url
 
-    val itemClickedLiveData = MutableLiveData(false)
+    val itemClickedLiveData = ObservableBoolean(false)
 
     fun itemOnClick() {
-        itemClickedLiveData.value = itemClickedLiveData.value?.not()
+        repositoryItemClickLiveData.call(this)
     }
 }

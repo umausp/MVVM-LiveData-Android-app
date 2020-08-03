@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.gojeck.feature.viewModel.RepositoryViewModel" />
+    </data>
+
     <com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="@{model.shimmerLoadingLiveData ? View.VISIBLE : View.GONE}">
 
         <LinearLayout
             android:layout_width="match_parent"

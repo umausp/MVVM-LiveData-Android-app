@@ -1,7 +1,10 @@
 package com.gojeck.base
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import androidx.annotation.MenuRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
@@ -18,19 +21,15 @@ abstract class BaseActivity : AppCompatActivity(), IBaseUi {
     override val toolbarId: Int
         get() = R.id.toolbar
 
-    override val initStateObserver: Observer<State> by lazy { stateObserverFullPage() }
 
-    override fun findFragmentManager(): FragmentManager = supportFragmentManager
-
-    override val shimmeringLayout: MutableLiveData<Boolean> = MutableLiveData(false)
-
-    override val networkErrorLayoutLiveData: MutableLiveData<Boolean> = MutableLiveData(false)
+    override var menuId = 0
+    override var onMenuItemClickListener: (MenuItem) -> Boolean = { _ -> false }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupView()
         setupActionbar()
-        setToolbarTitle("")
+        setToolbarTitle()
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -58,8 +57,30 @@ abstract class BaseActivity : AppCompatActivity(), IBaseUi {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
-    private fun setToolbarTitle(title: String?) {
-        supportActionBar?.title = title
+    override fun setMenu(@MenuRes menuId: Int, onMenuItemClickListener: (MenuItem) -> Boolean) {
+        this.menuId = menuId
+        this.onMenuItemClickListener = onMenuItemClickListener
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        if (menuId == 0) {
+            return super.onCreateOptionsMenu(menu)
+        }
+
+        menuInflater.inflate(menuId, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (onMenuItemClickListener(item)) {
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setToolbarTitle() {
+        supportActionBar?.title = ""
     }
 
     override fun onViewModelSetup() {}

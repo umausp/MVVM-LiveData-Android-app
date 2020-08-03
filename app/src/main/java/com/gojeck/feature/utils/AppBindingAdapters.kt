@@ -26,7 +26,7 @@ import com.gojeck.R
  * */
 @BindingAdapter("itemList", "itemLayoutId")
 fun <VM : Any> RecyclerView.bindData(
-    itemList: List<VM>,
+    itemList: List<VM>?,
     layoutId: Int
 ) {
     bindData(itemList, layoutId, null)

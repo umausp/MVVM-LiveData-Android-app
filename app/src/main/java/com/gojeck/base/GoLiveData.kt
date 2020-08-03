@@ -12,7 +12,6 @@ open class GoLiveData<T>() : MediatorLiveData<T>() {
 
     constructor(value: T) : this() {
         setValue(value)
-
     }
 
     //region firstActive

@@ -8,4 +8,6 @@
     <string name="something_went_wrong">Something went wrong&#8230;</string>
     <string name="error_sub_text">An alien is probably blocking your signal</string>
     <string name="retry">RETRY</string>
+    <string name="sort_by_stars">Sort by stars</string>
+    <string name="sort_by_name">Sort by name</string>
 </resources>

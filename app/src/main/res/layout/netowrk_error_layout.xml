@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.gojeck.feature.viewModel.RepositoryViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/lyt_network_error_main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_fafafa"
-        android:visibility="gone">
+        android:visibility="@{model.networkErrorLiveData ? View.VISIBLE : View.GONE}">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_network_error"
@@ -46,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_16"
             android:background="@drawable/drawable_green_button_background"
+            android:onClick="@{() -> model.getTrendingRepositories(true)}"
             android:text="@string/retry"
             android:textColor="@color/color_31b057"
             app:layout_constraintBottom_toBottomOf="parent"

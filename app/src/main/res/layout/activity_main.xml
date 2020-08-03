@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -37,19 +38,24 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_activity_main_trending_repository"
+                    itemLayoutId="@{@layout/trending_repositories_layout}"
+                    itemList="@{model.trendingRepositoryBindLiveData}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:visibility="@{model.shimmerLoadingLiveData ? View.GONE : View.VISIBLE}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/trending_repositories_layout" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             <include
                 android:id="@+id/network_error_layout"
-                layout="@layout/netowrk_error_layout" />
+                layout="@layout/netowrk_error_layout"
+                bind:model="@{model}" />
 
             <include
                 android:id="@+id/shimmer_layout"
-                layout="@layout/shimmering_loading_layout" />
+                layout="@layout/shimmering_loading_layout"
+                bind:model="@{model}" />
 
         </FrameLayout>
 

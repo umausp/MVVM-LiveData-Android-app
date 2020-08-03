@@ -2,26 +2,5 @@ package com.gojeck.base
 
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 
-open class BaseViewModel : ViewModel(), IBaseViewModel, LifecycleObserver {
-
-    override val initState by lazy { GoLiveState() }
-
-    override fun <T> GoLiveData<T>.loadDataAndState(
-        state2: GoLiveState?,
-        work: suspend CoroutineScope.() -> T
-    ): Job = viewModelScope.loadDataAndState(this@loadDataAndState, state2, work)
-
-    override fun <T> GoLiveResource<T>.load(
-        state: GoLiveState,
-        work: suspend CoroutineScope.() -> T
-    ): Job = viewModelScope.loadResource(this@load, state, work)
-
-
-    override fun <T> GoLiveResource<T>.load(work: suspend CoroutineScope.() -> T): Job {
-        return viewModelScope.loadResource(this@load, work)
-    }
-}
+open class BaseViewModel : ViewModel(), LifecycleObserver

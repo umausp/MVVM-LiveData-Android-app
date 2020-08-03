@@ -14,14 +14,20 @@ class RepositoryViewModel(private val trendingRepoRepositoryImpl: TrendingRepoRe
     BaseViewModel() {
 
     val shimmerLoadingLiveData = GoLiveData(false)
+
     val networkErrorLiveData = GoLiveData(false)
+
     val trendingRepositoryLiveData = GoLiveResource<List<TrendingRepositoryMainViewModel>?>()
+
+    val trendingRepositoryBindLiveData = GoLiveData<List<TrendingRepositoryMainViewModel>>()
+
+    val repositoryItemClickLiveData = GoLiveData<TrendingRepositoryMainViewModel>()
 
     init {
         getTrendingRepositories(false)
     }
 
-    fun getTrendingRepositories(forRefresh : Boolean) {
+    fun getTrendingRepositories(forRefresh: Boolean) {
         if (NetworkUtils.isNetworkAvailable(ctx)) {
             showNetworkErrorView(false)
 
@@ -39,7 +45,7 @@ class RepositoryViewModel(private val trendingRepoRepositoryImpl: TrendingRepoRe
 
     private fun convertToTrendingRepositoryMainViewModel(trendingRepositoriesModel: List<TrendingRepositoriesModelItem>): List<TrendingRepositoryMainViewModel> {
         return trendingRepositoriesModel.map {
-            TrendingRepositoryMainViewModel(it)
+            TrendingRepositoryMainViewModel(it, repositoryItemClickLiveData)
         }
     }
 
