@@ -40,5 +40,3 @@ sealed class Resource<out T> {
 }
 
 class ResourceException(val resource: Resource<Nothing>) : IOException()
-
-typealias State = Resource<Any?>

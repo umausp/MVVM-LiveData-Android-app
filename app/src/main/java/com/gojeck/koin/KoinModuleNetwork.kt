@@ -21,14 +21,6 @@ val koinModuleNetwork = module {
     }
 }
 
-inline fun <reified T> Module.api(crossinline url: () -> String? = { null }) {
-    factory<T> {
-        get<Retrofit> {
-            parametersOf(url())
-        }.create(T::class.java)
-    }
-}
-
 fun provideRetrofit(url: String, okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .baseUrl(url)

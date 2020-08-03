@@ -4,7 +4,7 @@ import androidx.room.Room
 import com.gojeck.utils.ctx
 import com.gojeck.utils.isTesting
 
-inline fun <reified T : TrendingRepoDatabase> createDatabase(name: String = T::class.simpleName!!): T {
+inline fun <reified T : BaseRoomDatabase> createDatabase(name: String = T::class.simpleName!!): T {
     if (isTesting) {
         return Room.inMemoryDatabaseBuilder(
             ctx,

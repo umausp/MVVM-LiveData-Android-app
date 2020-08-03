@@ -1,15 +1,14 @@
 package com.gojeck
 
 import androidx.multidex.MultiDexApplication
-import com.gojeck.koin.KoinModuleRepository
-import com.gojeck.koin.koinModuleNetwork
+import com.gojeck.koin.appComponent
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.core.logger.EmptyLogger
 
-class MyApplication : MultiDexApplication() {
+open class MyApplication : MultiDexApplication() {
 
     companion object {
         @JvmStatic
@@ -23,13 +22,7 @@ class MyApplication : MultiDexApplication() {
         initKoin()
     }
 
-    override fun onTerminate() {
-        super.onTerminate()
-        terminateKoin()
-    }
-
-
-    fun initKoin() {
+    private fun initKoin() {
         startKoin {
             if (BuildConfig.DEBUG) {
                 androidLogger()
@@ -38,11 +31,18 @@ class MyApplication : MultiDexApplication() {
             }
 
             androidContext(this@MyApplication)
-            modules(koinModuleNetwork + KoinModuleRepository)
+            modules(provideDependency())
         }
     }
 
-    fun terminateKoin() {
+    private fun terminateKoin() {
         stopKoin()
     }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        terminateKoin()
+    }
+
+    open fun provideDependency() = appComponent
 }
