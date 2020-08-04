@@ -4,6 +4,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ *
+ * refer to {[BaseRecyclerViewAdapter]}
+ */
 abstract class BaseRecyclerViewHolder<VM : Any>(private val binding: ViewDataBinding, private val lifecycleOwner: LifecycleOwner?) : RecyclerView.ViewHolder(binding.root) {
     lateinit var viewModel: VM
 

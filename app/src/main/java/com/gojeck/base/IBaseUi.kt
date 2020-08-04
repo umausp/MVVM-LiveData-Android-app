@@ -14,6 +14,10 @@ interface IBaseUi : SavedStateRegistryOwner, IMenuUi {
      */
     var binding: ViewDataBinding
 
+    /**
+     * toolbar id is "toolbar"
+     * If you want to change, override this property
+     */
     val toolbarId: Int
 
     val layoutId: Int

@@ -10,6 +10,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.gojeck.BR
 
+
+/**
+ *
+ *
+ * This is for using RecyclerView without implementing RecyclerViewAdapter by developer.
+ * refer to {[RecyclerViewBinder.bindRecyclerView]}
+ */
 abstract class BaseRecyclerViewAdapter<VM : Any>(
     val lifecycleOwner: LifecycleOwner? = null,
     diffUtil: DiffUtil.ItemCallback<VM> = object : DiffUtil.ItemCallback<VM>() {

@@ -9,11 +9,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.gojeck.R
 
+/**
+ * Client can directly use this class to create new Activity
+ *
+ * [layoutId] : override and input activity layout. if you don't want to show layout. set as 0
+ *[binding] : viewModel name should be "model" for auto binding, if you'd like to change it, override setVariable
+ *
+ * * [toolbarId] : if you use toolbar, define toolbar's id as 'toolbar' or override this property
+ *
+ * [onViewModelSetup] : override this when observe viewModel's liveData
+ *
+ * [observe] : observe livedata
+ *            fun <T> AliveData<T>.observe(onChanged: (T) -> Unit)
+ *            fun <T> AliveData<T>.observe(observer: Observer<in T>)
+ *
+ */
 abstract class BaseActivity : AppCompatActivity(), IBaseUi {
 
     override lateinit var binding: ViewDataBinding
