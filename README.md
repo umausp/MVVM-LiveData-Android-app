@@ -1,4 +1,4 @@
-# goJeck-project
+# MVVM-LiveData-Android-app-project
 This project is for GoJeck interview assignment
 
 Requirements:
