@@ -1,7 +1,4 @@
 # MVVM-LiveData-Android-app-project
-This project is for GoJeck interview assignment
-
-Requirements:
 
 ● The app should preferably support minimum Android API level 19.  
 ● The app should fetch the trending repositories from the provided public API and display it to the
