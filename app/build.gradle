@@ -54,7 +54,7 @@ android {
                 java.srcDir sharedTestDir
             }
         }
-        buildConfigField "String", "BASE_URI", '"https://ghapi.huchen.dev/"'
+        buildConfigField "String", "BASE_URI", '"https://private-3e95b-githubtrendingapi.apiary-mock.com/"'
     }
 
     buildTypes {
